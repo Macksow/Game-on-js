@@ -1,67 +1,38 @@
-let randomNumber1;
+document.querySelector(".button").addEventListener("click", play);
+
+const resultElement = document.querySelector("h1.header");
+const brickA = document.querySelector(".dice .img1");
+const brickB = document.querySelector(".dice .img2");
+
+function play() {
+ let dropResult = drop();
+ imagesChanger(dropResult[0], brickA);
+ imagesChanger(dropResult[1], brickB);
+ resultOfGambling(dropResult[0], dropResult[1]);
+}
+
+function imagesChanger(id, imageElement) {
+    return imageElement.setAttribute("src", `images/dice${id}.png`);
+}
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-getRandomIntInclusive(1, 6);
-randomNumber1 = getRandomIntInclusive(1, 6);
-randomNumber1;
 
-function imagesChanger1() {
-if (randomNumber1 == 1) {
-    return document.querySelector(".dice .img1").setAttribute("src", "images/dice1.png");
-} else if (randomNumber1 == 2) {
-    return document.querySelector(".dice .img1").setAttribute("src", "images/dice2.png");
-} else if (randomNumber1 == 3) {
-    return document.querySelector(".dice .img1").setAttribute("src", "images/dice3.png");
-} else if (randomNumber1 == 4) {
-    return document.querySelector(".dice .img1").setAttribute("src", "images/dice4.png");
-} else if (randomNumber1 == 5) {
-    return document.querySelector(".dice .img1").setAttribute("src", "images/dice5.png");
-} else if (randomNumber1 == 6) {
-    return document.querySelector(".dice .img1").setAttribute("src", "images/dice6.png");
-}
+function drop() {
+let a = getRandomIntInclusive(1, 6);
+let b = getRandomIntInclusive(1, 6);
+
+return [a, b];
 }
 
-let randomNumber2;
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-getRandomIntInclusive(1, 6);
-randomNumber2 = getRandomIntInclusive(1, 6);
-randomNumber2;
-
-function imagesChanger2() {
-if (randomNumber2 == 1) {
-    return document.querySelector(".dice .img2").setAttribute("src", "images/dice1.png");
-} else if (randomNumber2 == 2) {
-    return document.querySelector(".dice .img2").setAttribute("src", "images/dice2.png");
-} else if (randomNumber2 == 3) {
-    return document.querySelector(".dice .img2").setAttribute("src", "images/dice3.png");
-} else if (randomNumber2 == 4) {
-    return document.querySelector(".dice .img2").setAttribute("src", "images/dice4.png");
-} else if (randomNumber2 == 5) {
-    return document.querySelector(".dice .img2").setAttribute("src", "images/dice5.png");
-} else if (randomNumber2 == 6) {
-    return document.querySelector(".dice .img2").setAttribute("src", "images/dice6.png");
-}
-}
-
-function resultOfGambling() {
-   if (randomNumber1 > randomNumber2) {
-       return document.querySelector("h1").innerHTML = "🏁Player 1 Wins";
-   } else if (randomNumber1 < randomNumber2) {
-       return document.querySelector("h1").innerHTML = "Player 2 Wins🏁";
-   } else if (randomNumber1 == randomNumber2) {
-       return document.querySelector("h1").innerHTML = "Draw!";
+function resultOfGambling(a, b) {
+   if (a > b) {
+       return resultElement.innerHTML = "🏁Player 1 Wins";
+   } else if (a < b) {
+       return resultElement.innerHTML = "Player 2 Wins🏁";
    } 
-}
-
-function imagesChanger() {
- imagesChanger1();
- imagesChanger2();
- resultOfGambling()
-}
+       return resultElement.innerHTML = "Draw!";
+   }
